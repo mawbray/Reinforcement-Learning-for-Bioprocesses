@@ -12,10 +12,6 @@ from scipy.optimize import minimize
 eps  = np.finfo(float).eps
 import csv
 
-
-
-
-
 ####################### -- Defining Parameters and Designing Experiement -- #########################
 #investigating steps_, alpha and discount factor for 1,000,000 epochs of training 
 # Model definitions: parameters, steps, tf, x0  
@@ -30,8 +26,8 @@ state_UB = np.array([5, 1000])
 # Agent definitions: num_actions, eps_prob, alpha, discount
 num_actions = 15
 
-disc1 = np.array([0.55, 0.65, 0.75, 0.85, 0.95, 0.99])
-disc2 = np.array([0.75, 0.85, 0.95, 0.99])
+disc1 = np.array([0.55])
+disc2 = np.array([0.95])
 xi_ = np.array([3])                # Epsilon greedy definitions 
 
 # Experiment defintions: env, agent, controls, episodes
