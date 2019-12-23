@@ -1,3 +1,10 @@
+import numpy as np
+import pandas as pd
+import scipy.integrate as scp
+import matplotlib.pyplot as plt
+import numpy.random as rnd
+eps  = np.finfo(float).eps
+
 #################### --- Validation Simulation --- #####################
 class Experiment_Done(object):
     def __init__(self, env, agent, controls, episodes, eps):
