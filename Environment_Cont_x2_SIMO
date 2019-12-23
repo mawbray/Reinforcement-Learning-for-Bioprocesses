@@ -3,23 +3,8 @@
 Created on Tue Nov  5 09:34:05 2019
 @author: Max Mowbray - University of Manchester, Manchester, United Kingdom
 """
-#import pylab
+
 import numpy as np
-import pandas as pd
-import scipy.integrate as scp
-#from pylab import *
-import matplotlib.pyplot as plt
-#import csv
-#import os
-#import sys
-#import copy
-import numpy.random as rnd
-from scipy.spatial.distance import cdist
-#!pip install sobol_seq
-#import sobol_seq
-from scipy.optimize import minimize
-eps  = np.finfo(float).eps
-import csv
 
 ############ Defining Environment ##############
 
@@ -73,13 +58,13 @@ class Model_env:
               state[i] = state[i] - resid[i] * modulus[i] + modulus[i]
         
         # fixes for representation 
-        #Nitrate fix
+        # Nitrate fix
         if state[1] < 0:
           state[1] = 0
         elif state[0] < 0:
             state[0] = 0
         
-        #Biomass fix
+        # Biomass fix
         f = str(self.modulus[0])
         decimal = f[::-1].find('.')  
         state[0] = np.round(state[0], decimal)
