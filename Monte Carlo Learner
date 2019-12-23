@@ -24,7 +24,7 @@ class greedye_MCL:
       else: action = np.argmax(self.d[(state[0],state[1], time_to_term)])
       return action
 
-    def MClearn(self, state, action, reward):
+    def Learn(self, state, action, reward):
         self.reward = reward
         XT, NT = state[-1,0], state[-1,1] 
         # takes some state and attributes discounted reward to action via QL update 
