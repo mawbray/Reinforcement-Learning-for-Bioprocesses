@@ -1,3 +1,11 @@
+# Import 
+import numpy as np
+import scipy.integrate as scp
+
+import numpy.random as rnd
+eps  = np.finfo(float).eps
+
+
 ################# --- Training Agent --- #####################
 class Experiment(object):
     def __init__(self, env, agent, controls, episodes,xi):
