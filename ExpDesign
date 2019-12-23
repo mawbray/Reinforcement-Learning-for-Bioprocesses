@@ -1,5 +1,16 @@
 # Importing (only for Monte Carlo Learner)
+import numpy as np
+import pandas as pd
+import scipy.integrate as scp
 
+import matplotlib.pyplot as plt
+
+import numpy.random as rnd
+from scipy.spatial.distance import cdist
+
+from scipy.optimize import minimize
+eps  = np.finfo(float).eps
+import csv
 
 
 
