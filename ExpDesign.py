@@ -35,7 +35,7 @@ xi_ = np.array([3])                                                             
 
 # Experiment defintions: env, agent, controls, episodes
 controls = np.linspace(0,7,num_actions)                                                         # defining range of controls
-episodes_train = 1000000                                                                        # number of training epochs
+episodes_train = 1000                                                                        # number of training epochs
 episodes_valid = 1000                                                                           # numeber of validation epochs
 reward_training = np.zeros((episodes_train, xi_.shape[0], disc1.shape[0], disc2.shape[0]))      # memory allocation 
 reward_validation = np.zeros((episodes_valid, xi_.shape[0], disc1.shape[0], disc2.shape[0]))    # memory allocation 

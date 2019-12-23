@@ -5,6 +5,7 @@ Created on Tue Nov  5 09:34:05 2019
 """
 
 import numpy as np
+eps  = np.finfo(float).eps
 
 ############ Defining Environment ##############
 
