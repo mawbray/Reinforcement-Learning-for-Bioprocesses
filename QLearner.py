@@ -27,7 +27,7 @@ class greedye_QL:
       else: action = np.argmax(self.d[(state[0],state[1], time_to_term)])
       return action
 
-    def Qlearn(self, state, action, reward):
+    def Learn(self, state, action, reward):
         self.reward = reward
         XT, NT = state[-1,0], state[-1,1] 
         #takes some state and attributes discounted reward to action via QL update 
@@ -42,7 +42,7 @@ class greedye_QL:
           dXdt, dNdt = (state[i+1,0] - state[i,0]),  (state[i+1,1] - state[i,1])
           dRdX, dRdN = 100, -1
           varderivX, varderivN = dXdt * dRdX * 1/(XT+1), dNdt * dRdN * 1/(NT+1)
-          Rtp1 = (reward * self.disc1**(time_to_term)) * (1 + varderivX + varderivN)
+          Rtp1 = (varderivX + varderivN)
           self.d[(state[i,0],state[i,1],time_to_term)][int(indx)] = self.d[(state[i,0],state[i,1], time_to_term)][int(indx)] * (1-self.alpha) + self.alpha * (Rtp1 + opt_future*self.disc2)
           return   
         

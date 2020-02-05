@@ -47,17 +47,18 @@ class greedye_MCL:
                   time_to_ter = int(self.movements - j)                                         # defining time to termination (time index)
                   dXdt, dNdt = (state[j+1,0] - state[j,0]),  (state[j+1,1] - state[j,1])
                   dRdX, dRdN = 100, -1
-                  varderivX, varderivN = dXdt * dRdX * 1/(XT+1), dNdt * dRdN * 1/(NT+1)         # calculating variational derivative of action at time t = i
-                  Rtp1 = (reward * self.disc1**(time_to_ter)) * (1 + varderivX + varderivN)     # allocating reward based on some backallocation function discounted to time and implementation of variational derivative
+                  varderivX, varderivN = dXdt * dRdX, dNdt * dRdN         # calculating variational derivative of action at time t = i
+                  Rtp1 =  (self.disc1**time_to_ter)*(varderivX + varderivN)     # allocating reward based on some backallocation function discounted to time and implementation of variational derivative
                   Gt += Rtp1*self.disc2**(j-i)                                                  # updating observed return and discouting via \gamma_{2}
           else:
               dXdt, dNdt = (state[j+1,0] - state[j,0]),  (state[j+1,1] - state[j,1])
               dRdX, dRdN = 100, -1
-              varderivX, varderivN = dXdt * dRdX * 1/(XT+1), dNdt * dRdN * 1/(NT+1)
-              Rtp1 = (reward * self.disc1**(time_to_term)) * (1 + varderivX + varderivN)
+              varderivX, varderivN = dXdt * dRdX , dNdt * dRdN 
+              Rtp1 = (self.disc1**time_to_term)*(varderivX + varderivN)
               Gt += Rtp1                                                                        # for last action in sequence expected return is equivalent to reward observed
           alpha = W / self.dcount[(state[i,0],state[i,1],time_to_term)][int(indx)]              # updating learning parameter based on number s-a pair count
           self.d[(state[i,0],state[i,1],time_to_term)][int(indx)] = self.d[(state[i,0],state[i,1], time_to_term)][int(indx)] * (1-alpha) + alpha * (Gt)          
+          #print(Gt)
           return   
           
     def learned(self):

@@ -25,7 +25,7 @@ class greedye_SARSA:
       else: action = np.argmax(self.d[(state[0],state[1], time_to_term)])
       return action
 
-    def SARSA(self, state, action, reward):
+    def Learn(self, state, action, reward):
         self.reward = reward
         XT, NT = state[-1,0], state[-1,1] 
         #takes some state and attributes discounted reward to action via QL update 
@@ -33,7 +33,7 @@ class greedye_SARSA:
           indx = action[i]
           indx1 = action[i+1]
           time_to_term = int(self.movements - i)
-          self.dcount[(state[i,0],state[i,1],time_to_term)][int(indx)] = self.dcount[(state[i,0],state[i,1],time_to_term)][int(indx)] + 1      #updatingcount
+          #self.dcount[(state[i,0],state[i,1],time_to_term)][int(indx)] = self.dcount[(state[i,0],state[i,1],time_to_term)][int(indx)] + 1      #updatingcount
           if i < action.shape[0]-1:
               future = self.d[(state[i+1,0], state[i+1,1], int(time_to_term - 1))][int(indx1)]
           else: future = 0
@@ -41,7 +41,7 @@ class greedye_SARSA:
           dXdt, dNdt = (state[i+1,0] - state[i,0]),  (state[i+1,1] - state[i,1])
           dRdX, dRdN = 100, -1
           varderivX, varderivN = dXdt * dRdX * 1/(XT+1), dNdt * dRdN * 1/(NT+1)
-          Rtp1 = (reward * self.disc1**(time_to_term)) * (1 + varderivX + varderivN)             # reward allocation
+          Rtp1 = (varderivX + varderivN)             # reward allocation
           alpha = 0.1
           self.d[(state[i,0],state[i,1],time_to_term)][int(indx)] = self.d[(state[i,0],state[i,1], time_to_term)][int(indx)] * (1-alpha) + alpha * (Rtp1 + future*self.disc2)
           return   
